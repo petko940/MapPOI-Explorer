@@ -1,16 +1,29 @@
 import { useState } from 'react'
-import './App.css'
 import Map from './components/Map';
 import Search from './components/Search';
+import background from './assets/background.jpg';
 
 function App() {
-    const [center, setCenter] = useState({ lat: 42.743, lon: 25.62, zoom: 8 });
+    const [center, setCenter] = useState({ lat: 42.743, lon: 25.62, zoom: 7.5 });
     const [markers, setMarkers] = useState([]);
 
     return (
-        <div className="App">
-            <Search setCenter={setCenter} setMarkers={setMarkers} />
-            <Map center={center} markers={markers} setCenter={setCenter} setMarkers={setMarkers} />
+        <div className='h-screen' style={{ backgroundImage: `url(${background})` }}>
+            <div className='p-5'>
+                <Search setCenter={setCenter} setMarkers={setMarkers} />
+            </div>
+
+            <div className='flex'>
+                <div className="w-9/12 rounded-sm mx-5">
+                    <Map center={center} markers={markers} setCenter={setCenter} setMarkers={setMarkers} />
+                </div>
+
+                <div>
+                    Text
+                </div>
+            </div>
+
+
         </div>
     );
 };

@@ -5,7 +5,7 @@ import MapClickHandler from './MapClickHandler';
 
 const Map = ({ center, markers, setCenter, setMarkers }) => {
     return (
-        <MapContainer center={[center.lat, center.lon]} zoom={center.zoom} style={{ height: '100vh', width: '100%' }}>
+        <MapContainer center={[center.lat, center.lon]} zoom={center.zoom} style={{ height: '70vh'}}>
             <RecentMap center={center} />
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
