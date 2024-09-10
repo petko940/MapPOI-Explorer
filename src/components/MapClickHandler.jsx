@@ -12,12 +12,10 @@ const MapClickHandler = ({ setCenter, setMarkers }) => {
                 const data = await response.json();
 
                 const placeInfo = data.display_name || `(${lat.toFixed(4)}, ${lng.toFixed(4)})`;
-
                 setMarkers([{ lat, lon: lng, name: placeInfo }]);
 
             } catch (error) {
                 console.error(error);
-                setMarkers([{ lat, lon: lng, name: `Error fetching address (${lat.toFixed(4)}, ${lng.toFixed(4)})` }]);
             }
         },
     });
