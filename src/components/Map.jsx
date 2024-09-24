@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import RecentMap from './RecentMap.jsx';
 import MapClickHandler from './MapClickHandler';
@@ -21,7 +21,7 @@ const Map = ({ center, markers, setCenter, setMarkers, pois, setPOIs }) => {
                 </Marker>
             ))}
 
-            <PointsOfInterest center={center} setPOIs={setPOIs} /> {/* Load POIs based on the map center */}
+            <PointsOfInterest center={center} setPOIs={setPOIs} /> 
 
             {pois.map((poi, idx) => (
                 <Marker key={idx} position={[poi.lat, poi.lon]}>
