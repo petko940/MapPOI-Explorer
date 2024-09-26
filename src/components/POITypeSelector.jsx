@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import POITypes from '../helpers/POITypes';
 
-const POITypeSelector = ({ onTypeChange, markers }) => {
-    const [selectedMainCategory, setSelectedMainCategory] = useState(null);
+const POITypeSelector = ({
+    onTypeChange,
+    markers,
+    selectedMainCategory,
+    setSelectedMainCategory,
+}) => {
+    // const [selectedMainCategory, setSelectedMainCategory] = useState(null);
     const [selectedSubCategory, setSelectedSubCategory] = useState(null);
 
     const handleMainCategoryClick = (category) => {
         if (selectedMainCategory === category) {
             setSelectedMainCategory(null);
-            setSelectedSubCategory(null);     
-            onTypeChange(null);       
+            setSelectedSubCategory(null);
+            onTypeChange(null);
         } else {
             setSelectedMainCategory(category);
             setSelectedSubCategory(null);
@@ -23,7 +28,7 @@ const POITypeSelector = ({ onTypeChange, markers }) => {
             onTypeChange(null);
         } else {
             setSelectedSubCategory(subCategory);
-            onTypeChange(`${selectedMainCategory}=${subCategory}`);  
+            onTypeChange(`${selectedMainCategory}=${subCategory}`);
         }
     };
 

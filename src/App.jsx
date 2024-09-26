@@ -11,7 +11,8 @@ function App() {
     const [markers, setMarkers] = useState([]);
     const [pois, setPOIs] = useState([]);
     const [selectedType, setSelectedType] = useState("");
-    
+    const [selectedMainCategory, setSelectedMainCategory] = useState(null);
+
     const handleTypeChange = (type) => {
         setSelectedType(type);
 
@@ -20,12 +21,27 @@ function App() {
         };
     };
 
+    const resetPOITypeSelector = () => {
+        setSelectedType("");
+        setSelectedMainCategory(null);
+    };
+
     return (
         <div className='h-screen' style={{ backgroundImage: `url(${background})` }}>
-            <POITypeSelector onTypeChange={handleTypeChange} markers={markers} />
+            <POITypeSelector
+                onTypeChange={handleTypeChange}
+                markers={markers}
+                selectedMainCategory={selectedMainCategory}
+                setSelectedMainCategory={setSelectedMainCategory}
+            />
 
             <div className='p-5'>
-                <Search setCenter={setCenter} setMarkers={setMarkers} />
+                <Search
+                    setCenter={setCenter}
+                    setMarkers={setMarkers}
+                    resetPOITypeSelector={resetPOITypeSelector}
+                    setPOIs={setPOIs}
+                />
             </div>
 
             <div className='flex'>

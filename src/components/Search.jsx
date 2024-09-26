@@ -1,20 +1,19 @@
 import { useState } from "react";
 
-const Search = ({ setCenter, setMarkers }) => {
+const Search = ({ setCenter, setMarkers, resetPOITypeSelector, setPOIs }) => {
     const [location, setLocation] = useState('');
 
     const handleSearch = async (e) => {
         e.preventDefault();
+        resetPOITypeSelector();
+        setMarkers([]);
+        setPOIs([]);
 
         try {
             const response = await fetch(
                 `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(location)}&format=json`
             );
             const data = await response.json();
-
-            for (let i = 0; i < data.length; i++) {
-                console.log(`${data[i].display_name} | ${data[i].type}`);
-            }
 
             const location_type = {
                 city: 12,
@@ -48,8 +47,8 @@ const Search = ({ setCenter, setMarkers }) => {
 
                 if (boundingbox) {
                     const bbox = boundingbox.map(coord => parseFloat(coord));
-                    const latDiff = Math.abs(bbox[1] - bbox[0]); // Difference in latitude
-                    const lonDiff = Math.abs(bbox[3] - bbox[2]); // Difference in longitude
+                    const latDiff = Math.abs(bbox[1] - bbox[0]); 
+                    const lonDiff = Math.abs(bbox[3] - bbox[2]); 
                     const maxDiff = Math.max(latDiff, lonDiff);
 
                     if (maxDiff < 0.05) {
