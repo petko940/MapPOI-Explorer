@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import POITypes from '../helpers/POITypes';
 
-const POITypeSelector = ({ onTypeChange }) => {
+const POITypeSelector = ({ onTypeChange, markers }) => {
     const [selectedMainCategory, setSelectedMainCategory] = useState(null);
     const [selectedSubCategory, setSelectedSubCategory] = useState(null);
 
@@ -39,6 +39,7 @@ const POITypeSelector = ({ onTypeChange }) => {
                                 ? 'bg-green-500'
                                 : 'bg-blue-500'
                                 }`}
+                            disabled={markers.length === 0}
                         >
                             {category}
                         </button>
@@ -66,6 +67,7 @@ const POITypeSelector = ({ onTypeChange }) => {
                                     ? 'bg-green-500'
                                     : 'bg-blue-500'
                                     }`}
+                                disabled={markers.length === 0}
                             >
                                 {subCategory}
                             </button>
