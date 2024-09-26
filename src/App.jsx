@@ -22,7 +22,7 @@ function App() {
 
     return (
         <div className='h-screen' style={{ backgroundImage: `url(${background})` }}>
-            {markers[0] && <POITypeSelector onTypeChange={handleTypeChange} />}
+            <POITypeSelector onTypeChange={handleTypeChange} markers={markers} />
 
             <div className='p-5'>
                 <Search setCenter={setCenter} setMarkers={setMarkers} />
