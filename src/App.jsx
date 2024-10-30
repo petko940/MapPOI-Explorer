@@ -4,7 +4,9 @@ import Search from './components/Search';
 import background from './assets/background.jpg';
 
 import PointsOfInterest from './components/PointsOfInterest';
-import POITypeSelector from './components/POITypeSelector';  // The dropdown for selecting POI type
+import POITypeSelector from './components/POITypeSelector';
+import POIList from './components/POIList';
+
 
 function App() {
     const [center, setCenter] = useState({ lat: 42.743, lon: 25.62, zoom: 7.5 });
@@ -24,6 +26,10 @@ function App() {
     const resetPOITypeSelector = () => {
         setSelectedType("");
         setSelectedMainCategory(null);
+    };
+
+    const handlePOIClick = (poi) => {
+        setCenter({ lat: poi.lat, lon: poi.lon, zoom: 18 });
     };
 
     return (
@@ -57,9 +63,10 @@ function App() {
                 </div>
 
                 <div>
-                    Text
+                    <POIList pois={pois} handlePOIClick={handlePOIClick} />
                 </div>
             </div>
+
             <PointsOfInterest center={center} setPOIs={setPOIs} selectedType={selectedType} />
 
         </div>
