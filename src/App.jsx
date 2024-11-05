@@ -14,6 +14,8 @@ function App() {
     const [pois, setPOIs] = useState([]);
     const [selectedType, setSelectedType] = useState("");
     const [selectedMainCategory, setSelectedMainCategory] = useState(null);
+    const [selectedPOI, setSelectedPOI] = useState(null);
+
 
     const handleTypeChange = (type) => {
         setSelectedType(type);
@@ -30,6 +32,7 @@ function App() {
 
     const handlePOIClick = (poi) => {
         setCenter({ lat: poi.lat, lon: poi.lon, zoom: 18 });
+        setSelectedPOI(poi);
     };
 
     return (
@@ -59,6 +62,7 @@ function App() {
                         setMarkers={setMarkers}
                         pois={pois}
                         setPOIs={setPOIs}
+                        selectedPOI={selectedPOI}
                     />
                 </div>
 

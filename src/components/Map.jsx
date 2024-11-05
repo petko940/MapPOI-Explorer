@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import RecentMap from './RecentMap.jsx';
 import MapClickHandler from './MapClickHandler';
 import PointsOfInterest from './PointsOfInterest.jsx';
-
+import { useEffect, useRef } from 'react';
 
 import {
     defaultIcon,
@@ -18,7 +18,23 @@ import {
 } from '../helpers/mapIcons';
 
 
-const Map = ({ center, markers, setCenter, setMarkers, pois, setPOIs }) => {
+const Map = ({ center, markers, setCenter, setMarkers, pois, setPOIs, selectedPOI }) => {
+    const popupRefs = useRef({});
+
+    useEffect(() => {
+        if (selectedPOI) {
+            const index = pois.findIndex(poi => poi.lat === selectedPOI.lat && poi.lon === selectedPOI.lon);
+            if (popupRefs.current[index]) {
+                popupRefs.current[index].openPopup();
+            };
+        };
+
+        if (pois.length <= 0) {
+            selectedPOI = undefined;
+        };
+        
+    }, [selectedPOI, pois]);
+
     const getIconForType = (type) => {
         switch (type) {
             case 'restaurant':
@@ -60,11 +76,28 @@ const Map = ({ center, markers, setCenter, setMarkers, pois, setPOIs }) => {
 
             <PointsOfInterest center={center} setPOIs={setPOIs} />
 
-            {pois.map((poi, idx) => (
+            {/* {pois.map((poi, idx) => (
                 <Marker key={idx} position={[poi.lat, poi.lon]} icon={getIconForType(poi.type)}>
                     <Popup>{poi.name}</Popup>
                 </Marker>
+            ))} */}
+
+            {pois.map((poi, idx) => (
+                <Marker
+                    key={idx} 
+                    position={[poi.lat, poi.lon]}
+                    icon={getIconForType(poi.type)}
+                    ref={(el) => {
+                        if (el) {
+                            popupRefs.current[idx] = el; 
+                        };
+                    }}
+                >
+                    <Popup>{poi.name}</Popup>
+                </Marker>
             ))}
+
+
         </MapContainer>
     );
 };
