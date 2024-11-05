@@ -15,7 +15,7 @@ function App() {
     const [selectedType, setSelectedType] = useState("");
     const [selectedMainCategory, setSelectedMainCategory] = useState(null);
     const [selectedPOI, setSelectedPOI] = useState(null);
-
+    const [viewCenter, setViewCenter] = useState(center);
 
     const handleTypeChange = (type) => {
         setSelectedType(type);
@@ -31,7 +31,7 @@ function App() {
     };
 
     const handlePOIClick = (poi) => {
-        setCenter({ lat: poi.lat, lon: poi.lon, zoom: 18 });
+        setViewCenter({ lat: poi.lat, lon: poi.lon, zoom: 18 });
         setSelectedPOI(poi);
     };
 
@@ -46,7 +46,10 @@ function App() {
 
             <div className='p-5'>
                 <Search
-                    setCenter={setCenter}
+                    setCenter={(newCenter) => {
+                        setViewCenter(newCenter);
+                        setCenter(newCenter);
+                    }}
                     setMarkers={setMarkers}
                     resetPOITypeSelector={resetPOITypeSelector}
                     setPOIs={setPOIs}
@@ -56,7 +59,7 @@ function App() {
             <div className='flex'>
                 <div className="w-9/12 rounded-sm mx-5">
                     <Map
-                        center={center}
+                        center={viewCenter}
                         markers={markers}
                         setCenter={setCenter}
                         setMarkers={setMarkers}
@@ -67,11 +70,18 @@ function App() {
                 </div>
 
                 <div>
-                    <POIList pois={pois} handlePOIClick={handlePOIClick} />
+                    <POIList
+                        pois={pois}
+                        handlePOIClick={handlePOIClick}
+                    />
                 </div>
             </div>
 
-            <PointsOfInterest center={center} setPOIs={setPOIs} selectedType={selectedType} />
+            <PointsOfInterest
+                center={viewCenter}
+                setPOIs={setPOIs}
+                selectedType={selectedType}
+            />
 
         </div>
 
