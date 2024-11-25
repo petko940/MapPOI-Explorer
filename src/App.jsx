@@ -16,7 +16,7 @@ function App() {
     const [selectedMainCategory, setSelectedMainCategory] = useState(null);
     const [selectedPOI, setSelectedPOI] = useState(null);
     const [viewCenter, setViewCenter] = useState(center);
-    
+
     const handleTypeChange = (type) => {
         setSelectedType(type);
 
@@ -63,7 +63,7 @@ function App() {
                         markers={markers}
                         setCenter={(newCenter) => {
                             setViewCenter(newCenter);
-                            setCenter(newCenter); 
+                            setCenter(newCenter);
                         }}
                         setMarkers={setMarkers}
                         pois={pois}
@@ -81,7 +81,7 @@ function App() {
             </div>
 
             <PointsOfInterest
-                center={viewCenter}
+                center={center}
                 setPOIs={setPOIs}
                 selectedType={selectedType}
             />
