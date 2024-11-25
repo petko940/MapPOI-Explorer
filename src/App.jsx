@@ -16,7 +16,7 @@ function App() {
     const [selectedMainCategory, setSelectedMainCategory] = useState(null);
     const [selectedPOI, setSelectedPOI] = useState(null);
     const [viewCenter, setViewCenter] = useState(center);
-
+    
     const handleTypeChange = (type) => {
         setSelectedType(type);
 
@@ -61,7 +61,10 @@ function App() {
                     <Map
                         center={viewCenter}
                         markers={markers}
-                        setCenter={setCenter}
+                        setCenter={(newCenter) => {
+                            setViewCenter(newCenter);
+                            setCenter(newCenter); 
+                        }}
                         setMarkers={setMarkers}
                         pois={pois}
                         setPOIs={setPOIs}
