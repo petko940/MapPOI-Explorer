@@ -32,7 +32,7 @@ function App() {
 
     const handlePOIClick = (poi) => {
         setViewCenter({ lat: poi.lat, lon: poi.lon, zoom: 18 });
-        setSelectedPOI(poi);
+        setSelectedPOI(poi);       
     };
 
     return (
@@ -76,6 +76,7 @@ function App() {
                     <POIList
                         pois={pois}
                         handlePOIClick={handlePOIClick}
+                        selectedPOI={selectedPOI}
                     />
                 </div>
             </div>
